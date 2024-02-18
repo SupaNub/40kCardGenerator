@@ -1,0 +1,254 @@
+:root {
+  --theme_colour1: #408050;
+  --theme_colour2: #90D0B0;
+  --theme_colour3:#000;
+  --logoURL:url('./img/orkz_logo.png');
+}
+
+html {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  font-weight: 500;
+}
+
+h1{
+  color: #FFF;
+  font-weight:700;
+  font-size: 32pt;
+  font-family: 'Trade Winds', cursive;
+}
+
+h2{
+  color: #FFF;
+  font-weight:700;
+  font-size: 20pt;
+  font-family: 'Trade Winds', cursive;
+}
+
+.sideBySide{
+  display:flex;
+  justify-content: center;
+}
+
+.toggleContent {
+  overflow: hidden;
+  transition: height 2s;
+  display:flex;
+  justify-content: center;
+}
+#themeToggle,#logoToggle{
+  background-color: var(--theme_colour2);
+  border: 4px solid var(--theme_colour1);
+  border-radius: 10px;
+}
+#themeToggle1,#logoToggle1{
+  margin-right:40px;
+}
+#themeToggle1,#themeToggle2,#logoToggle1,#logoToggle2{
+  flex:1;
+  background-color: var(--theme_colour1);
+  color:#FFF;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight:300;
+  font-size: 16pt;
+  font-family: 'Trade Winds', cursive;
+}
+
+#setup_div{
+  background-color:  var(--theme_colour2);
+  opacity: 0.9;
+  border: 4px solid var(--theme_colour1);
+  border-radius: 10px;
+}
+.card_title{
+  font-weight:300;
+  font-size: 24pt;
+  font-family: 'Trade Winds', cursive;
+}
+
+.card_h1{
+  font-weight:700;
+  font-size: 11pt;
+  color:#000;
+}
+.card_h2{
+  font-weight:400;
+  font-size: 20pt;
+  color:#000;
+}
+
+#loadStatus{
+  font-weight:300;
+  font-size: 24pt;
+  color:white;
+  font-family: 'Trade Winds', cursive;
+}
+#generateButton{
+  weight:600;
+  width:20%;
+  padding: 10px;
+  border: 4px solid var(--theme_colour3);
+  background-color: var(--theme_colour1);
+  color:#FFF;
+  font-size: 16pt;
+  font-family: 'Trade Winds', cursive;
+}
+
+#setup_div{
+  width:100%;
+  text-align: center;
+  justify-content: center;
+}
+
+#cards-container{
+  display:grid;
+  justify-content: center;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+#cards-container ul{
+  margin:0;
+}
+
+.unit-card{
+  display:grid;
+  width: 19.6cm;
+  height:13.9cm;
+  padding:4px;
+  margin: 0.15cm;
+  border: 7.5px solid var(--theme_colour1);
+  border-radius: 15px;
+  grid-auto-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-gap:2px;
+  background-color: var(--theme_colour2);
+  text-align: left;
+}
+#army-summary-card-template{
+  page-break-after:always;
+}
+.summary-card{
+  display:block;
+  width: 19cm;
+  height:28.1cm;
+  padding:4px;
+  margin: 0.55cm;
+  border: 5px solid var(--theme_colour1);
+  border-radius: 10px;
+  background-color: var(--theme_colour2);
+}
+
+.summary-card table{
+  width:100%;
+}
+
+.summary-card th{
+  color:#EEE;
+}
+.summary-card td{
+  border-bottom: 2px solid var(--theme_colour1);
+  padding:0px;
+}
+.statCell{
+  text-align: center;
+}
+.unit-banner{
+  display:grid;
+  grid-column: span 1;
+  background-image: var(--logoURL);
+  background-repeat: no-repeat;
+  background-size:60%;
+  background-position: center;
+}
+
+.unit-stats-container{
+  display:grid;
+  grid-column: span 1;
+  font-size: 18pt;
+  font-weight: 700pt;
+}
+
+.unit-stats-container table{
+  border-collapse: separate;
+  border-spacing: -1px;
+  color:white;
+}
+.slider{
+  width:20%;
+}
+select, input, button{
+  background-color: var(--theme_colour2);
+  border: 3px solid var(--theme_colour1);
+  border-radius: 6px;
+  margin:3px;
+}
+.unit-stats-container td,th{
+  background-color: var(--theme_colour1);
+  border: 3px solid var(--theme_colour3);
+  border-radius: 6px;
+  text-align: center;
+  min-width:40px;
+}
+#modelNames{
+  font-size:8pt;
+}
+#spacer_blank{
+  background-color:transparent;
+  border:0px;
+}
+
+.melee-weapons, .ranged-weapons{
+  grid-column: span 1;
+  grid-row: span 1;
+  border: 5px solid var(--theme_colour1);
+  border-radius: 10px;
+  padding:4px;
+  font-size: 9.5pt;
+}
+
+.ranged-weapons table,.melee-weapons table{
+  width:100%;
+}
+
+.ranged-weapons td,.melee-weapons td{
+  border-bottom: 2px solid var(--theme_colour1);
+  padding:0px;
+  text-align: center;
+}
+
+.ranged-weapons .weapon_name, .melee-weapons .weapon_name{
+  text-align: right;
+}
+
+.unit-keywords{
+  grid-column: span 1;
+  border: 5px solid var(--theme_colour1);
+  border-radius: 10px;
+  padding:4px;
+  font-size: 8pt;
+}
+.card-logo{
+  grid-row: span 2;
+  border: 5px solid var(--theme_colour1);
+  border-radius: 10px;
+  padding:4px;
+  font-size: 10pt;
+}
+.unit-details-container{
+  grid-column: span 1;
+  grid-row:span 1;
+  border: 5px solid var(--theme_colour1);
+  border-radius: 10px;
+  padding:4px;
+  font-size: 8pt;
+}
+
+.unit-ability-desc{
+  grid-column: span 2;
+  border: 5px solid var(--theme_colour1);
+  border-radius: 10px;
+  padding:4px;
+  font-size: 7.5pt;
+}

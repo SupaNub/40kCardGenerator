@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>replit</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <div id=setup_div>
+    <h1>WAAAAAGH! Quick Reference Sheet Generator</h1>
+
+    <h2>Army List:</h2>
+    <input type="file" id="fileInput">
+    <button id="loadButton">Load List</button>
+
+    <p id=loadStatus></p>
+
+    <button id=generateButton disabled>Generate Cards</button>
+    <input type="checkbox" id="armySummaryCheckBox" name="myCheckbox" checked>
+    <label for="myCheckbox">Army Summary Page</label>
+
+    <div id=styleSelectors>
+      <div class=sideBySide>
+        <div class=selection>
+          <h2>Theme</h2>
+            <button id="themeToggle">
+              <div class="toggleContent">
+                <div id="themeToggle1">Predefined</div>
+                <div id="themeToggle2" style="opacity: 0.4;">Custom</div>
+              </div>
+            </button>
+            <br>
+            <div class="toggleContent">
+              <select id=predefinedTheme>
+              <option id=space_marines value="space_marines">Space Marines</option>
+              <option id=black_templars_sel value="black_templars">Black Templars</option>
+              <option id=blood_angels_sel value="blood_angels">Blood Angels</option>
+              <option id=dark_angels_sel value="dark_angels">Dark Angels</option>
+              <option id=deathwatch_sel value="deathwatch">Deathwatch</option>
+              <option id=space_wolves_sel value="space_wolves">Space Wolves</option>
+              <!-- <option id=ad_sisters_sel value="ad_sisters">Adepta Sororitas</option> -->
+              <!-- <option id=ad_custodes_sel value="ad_custodes">Adeptus Custodes</option> -->
+              <!-- <option id=ad_mechanicus_sel value="ad_mechanicus">Adeptus Mechanicus</option> -->
+              <!-- <option id=imp_agents_sel value="imp_agents">Agents of the Imperium</option> -->
+              <!-- <option id=imp_guard_sel value="imp_guard">Astra Militarum</option> -->
+              <!-- <option id=grey_knights_sel value="grey_knights">Grey Knights</option> -->
+              <option id=imp_knights_sel value="imp_knights">Imperial Knights</option>
+              <option id=chaos_daemons_sel value="chaos_daemons">Chaos Daemons</option>
+              <option id=chaos_knights_sel value="chaos_knights">Chaos Knights</option>
+              <option id=chaos_space_marines_sel value="chaos_space_marines">Chaos Space Marines</option>
+              <option id=death_guard_sel value="death_guard">Death Guard</option>
+              <option id=thousand_sons_sel value="thousand_sons">Thousand Sons</option>
+              <!-- <option id=world_eaters_sel value="world_eaters">World Eaters</option> -->
+              <!-- <option id=aeldari_sel value="aeldari">Aeldari</option> -->
+              <!-- <option id=drukhari_sel value="drukhari">Drukhari</option> -->
+              <!-- <option id=genestealer_cults_sel value="genestealer_cults">Genestealer Cults</option> -->
+              <!-- <option id=leagues_of_votann_sel value="leagues_of_votann">Leagues of Votann</option> -->
+              <option id=necrons_sel value="necrons">Necrons</option>
+              <option selected id=orkz_sel value="orkz">Orkz</option>
+              <option id=tau_sel value="tau">T'au Empire</option>
+              <option id=tyranids_sel value="tyranids">Tyranids</option>
+            </select>
+              <div id=customTheme style="opacity: 0.4;">
+                Colour 1: <p id="colour1"></p>
+                <div class="slider-container">
+                  R:<input class="slider" type="range" min="0" max="255" value="64" id="redSlider1">
+                  G:<input class="slider" type="range" min="0" max="255" value="128" id="greenSlider1">
+                  B:<input class="slider" type="range" min="0" max="255" value="80" id="blueSlider1">
+                  <div id="color1-box"></div>
+                </div>
+                Colour 2: <p id="colour2"></p>
+                <div class="slider-container">
+                  R:<input class="slider" type="range" min="0" max="255" value="144" id="redSlider2">
+                  G:<input class="slider" type="range" min="0" max="255" value="208" id="greenSlider2">
+                  B:<input class="slider" type="range" min="0" max="255" value="176" id="blueSlider2">
+                  <div id="color2-box"></div>
+                </div>
+
+                Colour 3: <p id="colour3"></p>
+                <div class="slider-container">
+                  R:<input class="slider" type="range" min="0" max="255" value="0" id="redSlider3">
+                  G:<input class="slider" type="range" min="0" max="255" value="0" id="greenSlider3">
+                  B:<input class="slider" type="range" min="0" max="255" value="0" id="blueSlider3">
+                  <div id="color3-box"></div>
+                </div>
+              </div>
+            </div>
+          <h2>Logo</h2>
+          <button id="logoToggle">
+            <div class="toggleContent">
+              <div id="logoToggle1">Predefined</div>
+              <div id="logoToggle2" style="opacity: 0.4;">Custom</div>
+            </div>
+          </button>
+          <div class="toggleContent">
+            <select id=predefinedLogo>
+              <option id=space_marines value="space_marines">Space Marines</option>
+              <option id=black_templars_sel value="black_templars">Black Templars</option>
+              <option id=blood_angels_sel value="blood_angels">Blood Angels</option>
+              <option id=dark_angels_sel value="dark_angels">Dark Angels</option>
+              <option id=deathwatch_sel value="deathwatch">Deathwatch</option>
+              <option id=space_wolves_sel value="space_wolves">Space Wolves</option>
+              <!-- <option id=ad_sisters_sel value="ad_sisters">Adepta Sororitas</option> -->
+              <!-- <option id=ad_custodes_sel value="ad_custodes">Adeptus Custodes</option> -->
+              <!-- <option id=ad_mechanicus_sel value="ad_mechanicus">Adeptus Mechanicus</option> -->
+              <!-- <option id=imp_agents_sel value="imp_agents">Agents of the Imperium</option> -->
+              <!-- <option id=imp_guard_sel value="imp_guard">Astra Militarum</option> -->
+              <!-- <option id=grey_knights_sel value="grey_knights">Grey Knights</option> -->
+              <option id=imp_knights_sel value="imp_knights">Imperial Knights</option>
+              <option id=chaos_daemons_sel value="chaos_daemons">Chaos Daemons</option>
+              <option id=chaos_knights_sel value="chaos_knights">Chaos Knights</option>
+              <option id=chaos_space_marines_sel value="chaos_space_marines">Chaos Space Marines</option>
+              <option id=death_guard_sel value="death_guard">Death Guard</option>
+              <option id=thousand_sons_sel value="thousand_sons">Thousand Sons</option>
+              <!-- <option id=world_eaters_sel value="world_eaters">World Eaters</option> -->
+              <!-- <option id=aeldari_sel value="aeldari">Aeldari</option> -->
+              <!-- <option id=drukhari_sel value="drukhari">Drukhari</option> -->
+              <!-- <option id=genestealer_cults_sel value="genestealer_cults">Genestealer Cults</option> -->
+              <!-- <option id=leagues_of_votann_sel value="leagues_of_votann">Leagues of Votann</option> -->
+              <option id=necrons_sel value="necrons">Necrons</option>
+              <option selected id=orkz_sel value="orkz">Orkz</option>
+              <option id=tau_sel value="tau">T'au Empire</option>
+              <option id=tyranids_sel value="tyranids">Tyranids</option>
+            </select>
+            <input disabled style="opacity: 0.4;" type="file" id="customLogo" accept="image/*">
+          </div>
+        </div>
+        <div class=unit-card>
+          <div class="unit-banner">
+            <text class="card_title">Big Mek in Mega Armour [85pts]</text>
+          </div>
+          <div class="unit-stats-container">
+            <table class="unit-stats">
+              <tbody><tr>
+                <td id="spacer_blank"></td>
+                <th>M</th>
+                <th>T</th>
+                <th>Sv</th>
+                <th>W</th>
+                <th>Ld</th>
+                <th>OC</th>
+              </tr>
+                <tr>
+                  <td id="modelNames">Big Mek in Mega Armour</td>
+                  <td>5"</td>
+                  <td>6</td>
+                  <td>2+</td>
+                  <td>5</td>
+                  <td>7+</td>
+                  <td>1</td>
+                </tr>
+            </tbody></table>
+          </div>
+          <div class="melee-weapons">
+            <text class="card_h1">Melee Weapons</text>
+            <table>
+              <tbody><tr>
+                <td class="weapon_name">Name</td>
+                <td>Range</td>
+                <td>A</td>
+                <td>WS</td>
+                <td>S</td>
+                <td>AP</td>
+                <td>D</td>
+                <td>Keywords</td>
+              </tr>
+                  <tr>
+                    <td class="weapon_name">Power klaw</td>
+                    <td>Melee</td>
+                    <td>4</td>
+                    <td>3+</td>
+                    <td>9</td>
+                    <td>-2</td>
+                    <td>2</td>
+                    <td></td>
+                  </tr>
+            </tbody></table>
+          </div>
+
+          <div class="ranged-weapons">
+            <text class="card_h1">Ranged Weapons</text>
+            <table>
+              <tbody><tr>
+                <td class="weapon_name">Name</td>
+                <td>Range</td>
+                <td>A</td>
+                <td>BS</td>
+                <td>S</td>
+                <td>AP</td>
+                <td>D</td>
+                <td>Keywords</td>
+              </tr>
+                <tr>
+                  <td class="weapon_name">Kustom mega-blasta</td>
+                  <td>24"</td>
+                  <td>3</td>
+                  <td>5+</td>
+                  <td>9</td>
+                  <td>-2</td>
+                  <td>D6</td>
+                  <td>Hazardous</td>
+                </tr>
+            </tbody></table>
+          </div>
+          <div class="unit-ability-desc">
+            <text class="card_h1">Abilities</text>
+            <ul>
+                <li>
+                  <strong>Fix Dat Armour Up: </strong>While this model is leading a unit, in your Command phase, you can return 1 destroyed Bodyguard model to that unit.<br>
+                </li>
+                <li>
+                  <strong>Grot Oiler: </strong>Once per battle, at the end of your Movement phase, one model in the bearer’s unit regains D3 lost wounds.<br>
+                                                Designer’s Note: Place a Grot Oiler token next to the unit, removing it once this ability has been used.<br>
+                </li>
+                <li>
+                  <strong>Kustom force field: </strong>While the bearer is leading a unit, models in that unit have a 4+ invulnerable save against ranged attacks.<br>
+                </li>
+                <li>
+                  <strong>Leader: </strong>This model can be attached to the following unit:<br>
+                                                - MEGANOBZ<br>
+                </li>
+                <li>
+                  <strong>More Dakka: </strong>While this model is leading a unit, each time a model in that unit makes a ranged attack, re-roll a Hit roll of 1.<br>
+                </li>
+            </ul>
+          </div>
+          <div class="unit-keywords">
+            <strong>
+                                        <span class="bold">Categories:</span> <span class="caps">Character, Infantry, Big Mek in Mega Armour, Faction: Orks, Mega Armour, Warlord</span>
+                                    </strong>
+          </div>
+          <!-- <div class="card-logo"></div> -->
+          <div class="unit-details-container">
+            <strong>
+                                        <span class="bold">Selections:</span> Grot oiler, Kustom force field, Kustom mega-blasta, Power klaw, Warlord
+                                    </strong><br>
+            <strong>
+                                        <span class="bold">Rules:</span> <span class="italic">Hazardous, Leader, Waaagh!</span>
+                                    </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div id=cards-container></div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+  <script src="script.js"></script>
+  <!-- Army Summary Template -->
+  <script id="army-summary-card-template" type="text/x-handlebars-template">
+    <div class="summary-card">
+      {{#each this}}
+        {{#if @first}}
+          <h1 class="card_h2">{{{armyName}}}</h2>
+        {{/if}}
+      {{/each}}
+      <table>
+        <thead>
+          <tr>
+            <th>Unit Name</th>
+            <th>Model</th>
+            <th>M</th>
+            <th>T</th>
+            <th>Sv</th>
+            <th>W</th>
+            <th>Ld</th>
+            <th>OC</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each this}}
+            <tr>
+              <td rowspan="{{unitLength}}">{{unitName}}             </td>
+            {{#each unitStats}}
+              {{#if @index}}
+                <tr>
+                  <td>{{name}}</td>
+                  <td class=statCell>{{move}}</td>
+                  <td class=statCell>{{toughness}}</td>
+                  <td class=statCell>{{save}}</td>
+                  <td class=statCell>{{wounds}}</td>
+                  <td class=statCell>{{leadership}}</td>
+                  <td class=statCell>{{OC}}</td>
+                </tr>
+              {{else}}
+                  <td>{{name}}</td>
+                  <td class=statCell>{{move}}</td>
+                  <td class=statCell>{{toughness}}</td>
+                  <td class=statCell>{{save}}</td>
+                  <td class=statCell>{{wounds}}</td>
+                  <td class=statCell>{{leadership}}</td>
+                  <td class=statCell>{{OC}}</td>
+                </tr>
+              {{/if}}
+            {{/each}}
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+
+  </script>
+
+  <script id="unit-card-template" type="text/x-handlebars-template">
+    <div class="unit-card">
+      <div class="unit-banner">
+        <text class="card_title">{{name}}</text>
+      </div>
+      <div class="unit-stats-container">
+        <table class="unit-stats">
+          <tr>
+            <td id="spacer_blank"></td>
+            <th>M</th>
+            <th>T</th>
+            <th>Sv</th>
+            <th>W</th>
+            <th>Ld</th>
+            <th>OC</th>
+          </tr>
+          {{#each unitStats}}
+            <tr>
+              <td id=modelNames>{{name}}</td>
+              <td>{{move}}</td>
+              <td>{{toughness}}</td>
+              <td>{{save}}</td>
+              <td>{{wounds}}</td>
+              <td>{{leadership}}</td>
+              <td>{{OC}}</td>
+            </tr>
+          {{/each}}
+        </table>
+      </div>
+      <div class="melee-weapons">
+        <text class="card_h1">Melee Weapons</text>
+        <table>
+          <tr>
+            <td class="weapon_name">Name</td>
+            <td>Range</td>
+            <td>A</td>
+            <td>WS</td>
+            <td>S</td>
+            <td>AP</td>
+            <td>D</td>
+            <td>Keywords</td>
+          </tr>
+          {{#each meleeWeapons}}
+              <tr>
+                <td class="weapon_name">{{name}}</td>
+                <td>{{range}}</td>
+                <td>{{attacks}}</td>
+                <td>{{WS}}</td>
+                <td>{{strength}}</td>
+                <td>{{AP}}</td>
+                <td>{{damage}}</td>
+                <td>{{keywords}}</td>
+              </tr>
+          {{/each}}
+        </table>
+      </div>
+
+      <div class="ranged-weapons">
+        <text class="card_h1">Ranged Weapons</text>
+        <table>
+          <tr>
+            <td class="weapon_name">Name</td>
+            <td>Range</td>
+            <td>A</td>
+            <td>BS</td>
+            <td>S</td>
+            <td>AP</td>
+            <td>D</td>
+            <td>Keywords</td>
+          </tr>
+          {{#each rangedWeapons}}
+            <tr>
+              <td class="weapon_name">{{name}}</td>
+              <td>{{range}}</td>
+              <td>{{attacks}}</td>
+              <td>{{BS}}</td>
+              <td>{{strength}}</td>
+              <td>{{AP}}</td>
+              <td>{{damage}}</td>
+              <td>{{keywords}}</td>
+            </tr>
+          {{/each}}
+        </table>
+      </div>
+      <div class="unit-ability-desc">
+        <text class="card_h1">Abilities</text>
+        <ul>
+          {{#each abilityDesc}}
+            <li>
+              <strong>{{name}}: </strong>{{{desc}}}<br>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="unit-keywords">
+        <strong>{{{keywords}}}</strong>
+      </div>
+      <!-- <div class="card-logo"></div> -->
+      <div class="unit-details-container">
+        <strong>{{{loadout}}}</strong><br>
+        <strong>{{{unitModels}}}</strong><br>  
+        <strong>{{{rules}}}</strong>
+      </div>
+    </div>
+  </script>
+
+
+  
+</body>
+</html>
