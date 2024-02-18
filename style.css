@@ -77,6 +77,8 @@ h2{
   font-weight:400;
   font-size: 20pt;
   color:#000;
+  padding-left:10px;
+  padding-right:10px;
 }
 
 #loadStatus{
