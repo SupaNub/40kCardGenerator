@@ -333,7 +333,7 @@ function parseUnit(unitHTML){
   if (firstParagraph && !firstParagraph.attr('class')) {
     unitData.loadout = firstParagraph.html();
   }
-  let index_stats = 3; //this is the defaulkt stats table index but for transports it is changed to 4
+  /* let index_stats = 3; //this is the defaulkt stats table index but for transports it is changed to 4 */
 
 
   const modelList = unitHTML.find('ul').eq(0);
@@ -343,20 +343,74 @@ function parseUnit(unitHTML){
       unitData.unitModels.push(currModel.find('h4').eq(0).html());
       });
   }
-  
+  console.log("test");
+  unitHTML.find('table').each(function(){
+	 const tableName =  $(this).find('tr').eq(0).find('th').eq(0).html()
+	 
+	 $(this).find('tr:gt(0)').each(function(){
+		const row = $(this).find('td');
+		if(tableName =="Abilities" || tableName == "Transport"){
+			const ability = {
+				name: row .eq(0).html(),
+				desc: row .eq(1).html()
+			};
+			unitData.abilityDesc.push(ability);
+		}
+		else if(tableName =="Melee Weapons"){
+			const meleeWeapon = {
+				name: row.eq(0).html(),
+				range: row.eq(1).html(),
+				attacks: row.eq(2).html(),
+				WS: row.eq(3).html(),
+				strength: row.eq(4).html(),
+				AP: row.eq(5).html(),
+				damage: row.eq(6).html(),
+				keywords: row.eq(7).html()
+			};
+			unitData.meleeWeapons.push(meleeWeapon);
+		}
+		else if(tableName =="Ranged Weapons"){
+			const rangedWeapon = {
+				name: row.eq(0).html(),
+				range: row.eq(1).html(),
+				attacks: row.eq(2).html(),
+				BS: row.eq(3).html(),
+				strength: row.eq(4).html(),
+				AP: row.eq(5).html(),
+				damage: row.eq(6).html(),
+				keywords: row.eq(7).html()
+			};
+			unitData.rangedWeapons.push(rangedWeapon);
+			
+		}
+		else if(tableName =="Unit"){
+			const unitStat = {
+			  name: row.eq(0).html(),
+			  move: row.eq(1).html(),
+			  toughness: row.eq(2).html(),
+			  save: row.eq(3).html(),
+			  wounds: row.eq(4).html(),
+			  leadership: row.eq(5).html(),
+			  OC: row.eq(6).html()
+			};
+			unitData.unitStats.push(unitStat);
+		}
+	 });
+	 
+  });
   // Parse abilities table
-  unitHTML.find('table').eq(0).find('tr:gt(0)').each(function() {
+/*   unitHTML.find('table').eq(0).find('tr:gt(0)').each(function() {
       const abilitiesRow = $(this).find('td');
       const ability = {
         name: abilitiesRow .eq(0).html(),
         desc: abilitiesRow .eq(1).html()
       };
       unitData.abilityDesc.push(ability);
-    });
+    }); */
   
   
   // Parse melee weapons
-  unitHTML.find('table').eq(1).find('tr:gt(0)').each(function() {
+/*   unitHTML.find('table').eq(1).find('tr:gt(0)').each(function() {
     const weaponRow = $(this).find('td');
     const meleeWeapon = {
       name: weaponRow.eq(0).html(),
@@ -369,10 +423,10 @@ function parseUnit(unitHTML){
       keywords: weaponRow.eq(7).html()
     };
     unitData.meleeWeapons.push(meleeWeapon);
-  });
+  }); */
 
   // Parse ranged weapons
-  unitHTML.find('table').eq(2).find('tr:gt(0)').each(function() {
+/*   unitHTML.find('table').eq(2).find('tr:gt(0)').each(function() {
     const weaponRow = $(this).find('td');
     const rangedWeapon = {
       name: weaponRow.eq(0).html(),
@@ -385,9 +439,9 @@ function parseUnit(unitHTML){
       keywords: weaponRow.eq(7).html()
     };
     unitData.rangedWeapons.push(rangedWeapon);
-  });
+  }); */
 
-  if(unitHTML.find('table').length >= 5){
+/*   if(unitHTML.find('table').length >= 5){
     // Parse unit stats
     unitHTML.find('table').eq(3).find('tr:gt(0)').each(function() {
       const abilitiesRow = $(this).find('td');
@@ -398,10 +452,10 @@ function parseUnit(unitHTML){
       unitData.abilityDesc.push(ability);
     });
     index_stats=4;
-  }
+  } */
   
   // Parse unit stats
-  unitHTML.find('table').eq(index_stats).find('tr:gt(0)').each(function() {
+/*   unitHTML.find('table').eq(index_stats).find('tr:gt(0)').each(function() {
     const statsRow = $(this).find('td');
     const unitStat = {
       name: statsRow.eq(0).html(),
@@ -413,7 +467,7 @@ function parseUnit(unitHTML){
       OC: statsRow.eq(6).html()
     };
     unitData.unitStats.push(unitStat);
-  });
+  }); */
   unitList.push(unitData);
 }
 
