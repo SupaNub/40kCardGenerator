@@ -255,3 +255,8 @@ select, input, button{
   padding:4px;
   font-size: 7.5pt;
 }
+
+.format-options{
+	z-index:1000;
+	position:fixed;
+}

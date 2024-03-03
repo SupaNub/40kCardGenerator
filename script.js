@@ -398,76 +398,6 @@ function parseUnit(unitHTML){
 	 });
 	 
   });
-  // Parse abilities table
-/*   unitHTML.find('table').eq(0).find('tr:gt(0)').each(function() {
-      const abilitiesRow = $(this).find('td');
-      const ability = {
-        name: abilitiesRow .eq(0).html(),
-        desc: abilitiesRow .eq(1).html()
-      };
-      unitData.abilityDesc.push(ability);
-    }); */
-  
-  
-  // Parse melee weapons
-/*   unitHTML.find('table').eq(1).find('tr:gt(0)').each(function() {
-    const weaponRow = $(this).find('td');
-    const meleeWeapon = {
-      name: weaponRow.eq(0).html(),
-      range: weaponRow.eq(1).html(),
-      attacks: weaponRow.eq(2).html(),
-      WS: weaponRow.eq(3).html(),
-      strength: weaponRow.eq(4).html(),
-      AP: weaponRow.eq(5).html(),
-      damage: weaponRow.eq(6).html(),
-      keywords: weaponRow.eq(7).html()
-    };
-    unitData.meleeWeapons.push(meleeWeapon);
-  }); */
-
-  // Parse ranged weapons
-/*   unitHTML.find('table').eq(2).find('tr:gt(0)').each(function() {
-    const weaponRow = $(this).find('td');
-    const rangedWeapon = {
-      name: weaponRow.eq(0).html(),
-      range: weaponRow.eq(1).html(),
-      attacks: weaponRow.eq(2).html(),
-      BS: weaponRow.eq(3).html(),
-      strength: weaponRow.eq(4).html(),
-      AP: weaponRow.eq(5).html(),
-      damage: weaponRow.eq(6).html(),
-      keywords: weaponRow.eq(7).html()
-    };
-    unitData.rangedWeapons.push(rangedWeapon);
-  }); */
-
-/*   if(unitHTML.find('table').length >= 5){
-    // Parse unit stats
-    unitHTML.find('table').eq(3).find('tr:gt(0)').each(function() {
-      const abilitiesRow = $(this).find('td');
-      const ability = {
-        name: abilitiesRow .eq(0).html(),
-        desc: abilitiesRow .eq(1).html()
-      };
-      unitData.abilityDesc.push(ability);
-    });
-    index_stats=4;
-  } */
-  
-  // Parse unit stats
-/*   unitHTML.find('table').eq(index_stats).find('tr:gt(0)').each(function() {
-    const statsRow = $(this).find('td');
-    const unitStat = {
-      name: statsRow.eq(0).html(),
-      move: statsRow.eq(1).html(),
-      toughness: statsRow.eq(2).html(),
-      save: statsRow.eq(3).html(),
-      wounds: statsRow.eq(4).html(),
-      leadership: statsRow.eq(5).html(),
-      OC: statsRow.eq(6).html()
-    };
-    unitData.unitStats.push(unitStat);
-  }); */
   unitList.push(unitData);
 }
 
@@ -513,4 +443,37 @@ function generateArmySummary(armyStats){
   // Generate unit card HTML here
   var html = template(armyStats.flat());
   return html;
+}
+
+
+
+document.addEventListener('click', function(event) {
+    var targetElement = event.target;
+
+    // Check if the clicked element or its ancestors have the contenteditable attribute set to true
+    var isEditable = targetElement.closest('[contenteditable="true"]');
+    if (!isEditable && !targetElement.closest('.format-options')) {
+        document.getElementById('formatOptions').style.display = 'none';
+    }
+});
+	
+function showFormattingOptions() {
+	var formatOptions = document.getElementById('formatOptions');
+	var selection = window.getSelection();
+
+	if (selection.toString().length > 0) {
+		formatOptions.style.display = 'block';
+		formatOptions.style.top = (selection.getRangeAt(0).getBoundingClientRect().bottom) + 'px';
+		formatOptions.style.left = selection.getRangeAt(0).getBoundingClientRect().left + 'px';
+	} else {
+		formatOptions.style.display = 'none';
+	}
+}
+
+function increaseFontSize() {
+	document.execCommand('fontSize', false, '4');
+}
+
+function decreaseFontSize() {
+	document.execCommand('fontSize', false, '2');
 }

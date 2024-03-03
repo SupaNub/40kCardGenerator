@@ -253,6 +253,11 @@
 
   </div>
   <div id=cards-container></div>
+  
+  <div id="formatOptions" class="format-options">
+    <button onclick="increaseFontSize()">+</button>
+    <button onclick="decreaseFontSize()">-</button>
+  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
@@ -365,7 +370,7 @@
                 <td>{{strength}}</td>
                 <td>{{AP}}</td>
                 <td>{{damage}}</td>
-                <td>{{keywords}}</td>
+                <td contenteditable = true onmouseup="showFormattingOptions()">{{keywords}}</td>
               </tr>
           {{/each}}
         </table>
@@ -393,14 +398,14 @@
               <td>{{strength}}</td>
               <td>{{AP}}</td>
               <td>{{damage}}</td>
-              <td>{{keywords}}</td>
+              <td contenteditable = true onmouseup="showFormattingOptions()">{{keywords}}</td>
             </tr>
           {{/each}}
         </table>
       </div>
       <div class="unit-ability-desc">
         <text class="card_h1">Abilities</text>
-        <ul>
+        <ul contenteditable = true onmouseup="showFormattingOptions()">
           {{#each abilityDesc}}
             <li>
               <strong>{{name}}: </strong>{{{desc}}}<br>
@@ -408,11 +413,11 @@
           {{/each}}
         </ul>
       </div>
-      <div class="unit-keywords">
+      <div contenteditable = true onmouseup="showFormattingOptions()" class="unit-keywords">
         <strong>{{{keywords}}}</strong>
       </div>
       <!-- <div class="card-logo"></div> -->
-      <div class="unit-details-container">
+      <div contenteditable = true onmouseup="showFormattingOptions()" class="unit-details-container">
         <strong>{{{loadout}}}</strong><br>
         <strong>{{{unitModels}}}</strong><br>  
         <strong>{{{rules}}}</strong>
