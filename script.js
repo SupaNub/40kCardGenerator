@@ -50,7 +50,6 @@ function initialise(){
     generateCards();
   });
 
-
 }
 initialise(); //groups all listener functions and setup together
 
