@@ -133,6 +133,14 @@
             </select>
             <input disabled style="opacity: 0.4;" type="file" id="customLogo" accept="image/*">
           </div>
+		  
+          <h2>Abilities</h2>
+          <button id="abilitiesToggle">
+            <div class="toggleContent">
+              <div id="abilitiesToggle1">SHOW</div>
+              <div id="abilitiesToggle2" style="opacity: 0.4;">HIDE</div>
+            </div>
+          </button>
         </div>
         <div class=unit-card>
           <div class="unit-banner">
@@ -253,11 +261,6 @@
 
   </div>
   <div id=cards-container></div>
-  
-  <div id="formatOptions" class="format-options">
-    <button onclick="increaseFontSize()">+</button>
-    <button onclick="decreaseFontSize()">-</button>
-  </div>
 
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
@@ -331,6 +334,7 @@
             <th>M</th>
             <th>T</th>
             <th>Sv</th>
+			<th>Inv</th>
             <th>W</th>
             <th>Ld</th>
             <th>OC</th>
@@ -341,6 +345,7 @@
               <td>{{move}}</td>
               <td>{{toughness}}</td>
               <td>{{save}}</td>
+              <td>{{inv}}</td>
               <td>{{wounds}}</td>
               <td>{{leadership}}</td>
               <td>{{OC}}</td>
@@ -370,7 +375,7 @@
                 <td>{{strength}}</td>
                 <td>{{AP}}</td>
                 <td>{{damage}}</td>
-                <td contenteditable = true onmouseup="showFormattingOptions()">{{keywords}}</td>
+                <td contenteditable = true>{{keywords}}</td>
               </tr>
           {{/each}}
         </table>
@@ -398,14 +403,15 @@
               <td>{{strength}}</td>
               <td>{{AP}}</td>
               <td>{{damage}}</td>
-              <td contenteditable = true onmouseup="showFormattingOptions()">{{keywords}}</td>
+              <td contenteditable = true>{{keywords}}</td>
             </tr>
           {{/each}}
         </table>
       </div>
+	  
       <div class="unit-ability-desc">
         <text class="card_h1">Abilities</text>
-        <ul contenteditable = true onmouseup="showFormattingOptions()">
+        <ul contenteditable = true>
           {{#each abilityDesc}}
             <li>
               <strong>{{name}}: </strong>{{{desc}}}<br>
@@ -413,15 +419,130 @@
           {{/each}}
         </ul>
       </div>
-      <div contenteditable = true onmouseup="showFormattingOptions()" class="unit-keywords">
+	  
+      <div contenteditable = true class="unit-keywords">
         <strong>{{{keywords}}}</strong>
       </div>
       <!-- <div class="card-logo"></div> -->
-      <div contenteditable = true onmouseup="showFormattingOptions()" class="unit-details-container">
+      <div contenteditable = true class="unit-details-container">
         <strong>{{{loadout}}}</strong><br>
         <strong>{{{unitModels}}}</strong><br>  
         <strong>{{{rules}}}</strong>
       </div>
+    </div>
+  </script>
+  
+  
+  <script id="unit-card-template-reduced" type="text/x-handlebars-template">
+    <div class="unit-card" style="grid-auto-rows: 15% 22.5% auto auto;">
+      <div class="unit-banner">
+        <text class="card_title">{{name}}</text>
+      </div>
+	  
+      <div contenteditable = true class="unit-keywords">
+        <strong>{{{keywords}}}</strong><br>
+        <strong>{{{loadout}}}</strong>
+        <strong>{{{unitModels}}}</strong>
+		<!--
+		<br><br>
+        <strong>{{{rules}}}</strong>
+		-->
+      </div>
+      <div class="unit-stats-container" style="grid-column: span 2;font-size:14pt">
+        <table class="unit-stats">
+          <tr style="height:30%">
+            <td id="spacer_blank"></td>
+            <th>M</th>
+            <th>T</th>
+            <th>Sv</th>
+			<th>Inv</th>
+            <th>W</th>
+            <th>Ld</th>
+            <th>OC</th>
+          </tr>
+          {{#each unitStats}}
+            <tr style="height:30%">
+              <td id=modelNames>{{name}}</td>
+              <td>{{move}}</td>
+              <td>{{toughness}}</td>
+              <td>{{save}}</td>
+              <td>{{inv}}</td>
+              <td>{{wounds}}</td>
+              <td>{{leadership}}</td>
+              <td>{{OC}}</td>
+            </tr>
+          {{/each}}
+        </table>
+      </div>
+	  
+      <div class="melee-weapons" style="font-size:12pt;grid-column:span 2">
+        <text class="card_h1">Melee Weapons</text>
+        <table>
+          <tr>
+            <td class="weapon_name">Name</td>
+            <td>Range</td>
+            <td>A</td>
+            <td>WS</td>
+            <td>S</td>
+            <td>AP</td>
+            <td>D</td>
+            <td>Keywords</td>
+          </tr>
+          {{#each meleeWeapons}}
+              <tr>
+                <td class="weapon_name" style="font-size:10pt">{{name}}</td>
+                <td>{{range}}</td>
+                <td>{{attacks}}</td>
+                <td>{{WS}}</td>
+                <td>{{strength}}</td>
+                <td>{{AP}}</td>
+                <td>{{damage}}</td>
+                <td style="font-size:10pt" contenteditable = true>{{keywords}}</td>
+              </tr>
+          {{/each}}
+        </table>
+      </div>
+
+      <div class="ranged-weapons" style="font-size:12pt;grid-column:span 2">
+        <text class="card_h1">Ranged Weapons</text>
+        <table>
+          <tr>
+            <td class="weapon_name" >Name</td>
+            <td>Range</td>
+            <td>A</td>
+            <td>BS</td>
+            <td>S</td>
+            <td>AP</td>
+            <td>D</td>
+            <td>Keywords</td>
+          </tr>
+          {{#each rangedWeapons}}
+            <tr>
+              <td class="weapon_name" style="font-size:10pt">{{name}}</td>
+              <td>{{range}}</td>
+              <td>{{attacks}}</td>
+              <td>{{BS}}</td>
+              <td>{{strength}}</td>
+              <td>{{AP}}</td>
+              <td>{{damage}}</td>
+              <td contenteditable = true style="font-size:10pt">{{keywords}}</td>
+            </tr>
+          {{/each}}
+        </table>
+      </div>
+	  
+	  <!--
+      <div class="unit-ability-desc">
+        <text class="card_h1">Abilities</text>
+        <ul contenteditable = true>
+          {{#each abilityDesc}}
+            <li>
+              <strong>{{name}}: </strong>{{{desc}}}<br>
+            </li>
+          {{/each}}
+        </ul>
+      </div>-->
+	  
     </div>
   </script>
 

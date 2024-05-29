@@ -4,10 +4,12 @@ let armyName='';
 // Get references to the input and preview elements
 let themeToggleOpen = true;
 let logoToggleOpen = true;
+let abilitiesToggleOpen = true;
 
 function initialise(){
   document.getElementById("themeToggle").addEventListener('click', function() {themeToggle();});
   document.getElementById("logoToggle").addEventListener('click', function() {logoToggle();});
+  document.getElementById("abilitiesToggle").addEventListener('click', function() {abilitiesToggle();});
 
   document.getElementById("redSlider1").addEventListener("input", function(){ updateColour(1)});
   document.getElementById("greenSlider1").addEventListener("input", function(){ updateColour(1)});
@@ -281,7 +283,17 @@ function updateLogo(event) {
     }
   }
 }
-
+function abilitiesToggle(){
+  if (abilitiesToggleOpen) {
+    document.getElementById("abilitiesToggle1").style.opacity = 0.4;
+    document.getElementById("abilitiesToggle2").style.opacity = 1;
+    abilitiesToggleOpen = false;
+  } else {
+    document.getElementById("abilitiesToggle1").style.opacity = 1;
+    document.getElementById("abilitiesToggle2").style.opacity = 0.4;
+    abilitiesToggleOpen = true;
+  }
+}
 //battlescribe loads
 function loadArmy(file) {
   const reader = new FileReader();
@@ -310,6 +322,7 @@ function loadArmy(file) {
               }
           });
       });
+	  //console.log(unitList)
       document.getElementById('loadStatus').innerHTML = "Load Successful";
       document.getElementById("generateButton").disabled = false;
   };
@@ -343,13 +356,17 @@ function parseUnit(unitHTML){
       unitData.unitModels.push(currModel.find('h4').eq(0).html());
       });
   }
-  console.log("test");
+  var inv_save = "-"
   unitHTML.find('table').each(function(){
 	 const tableName =  $(this).find('tr').eq(0).find('th').eq(0).html()
 	 
 	 $(this).find('tr:gt(0)').each(function(){
 		const row = $(this).find('td');
 		if(tableName =="Abilities" || tableName == "Transport"){
+			if((row.eq(0).html()).includes("Invulnerable Save")){
+				//console.log(unitData.name + " " + (row.eq(0).html()).substring(19,21));
+				inv_save = row.eq(0).html().substring(19,21);
+			} 
 			const ability = {
 				name: row .eq(0).html(),
 				desc: row .eq(1).html()
@@ -391,7 +408,8 @@ function parseUnit(unitHTML){
 			  save: row.eq(3).html(),
 			  wounds: row.eq(4).html(),
 			  leadership: row.eq(5).html(),
-			  OC: row.eq(6).html()
+			  OC: row.eq(6).html(),
+			  inv:inv_save
 			};
 			unitData.unitStats.push(unitStat);
 		}
@@ -424,7 +442,13 @@ function generateCards(){
 }
 function generateUnitCard(unit){
   // Get the Handlebars template
-  var source = document.getElementById("unit-card-template").innerHTML;
+  if(abilitiesToggleOpen){
+	var source = document.getElementById("unit-card-template").innerHTML;
+  }
+  else{
+	var source = document.getElementById("unit-card-template-reduced").innerHTML;
+	
+  }
 
   // Compile the template
   var template = Handlebars.compile(source);
@@ -445,35 +469,3 @@ function generateArmySummary(armyStats){
   return html;
 }
 
-
-
-document.addEventListener('click', function(event) {
-    var targetElement = event.target;
-
-    // Check if the clicked element or its ancestors have the contenteditable attribute set to true
-    var isEditable = targetElement.closest('[contenteditable="true"]');
-    if (!isEditable && !targetElement.closest('.format-options')) {
-        document.getElementById('formatOptions').style.display = 'none';
-    }
-});
-	
-function showFormattingOptions() {
-	var formatOptions = document.getElementById('formatOptions');
-	var selection = window.getSelection();
-
-	if (selection.toString().length > 0) {
-		formatOptions.style.display = 'block';
-		formatOptions.style.top = (selection.getRangeAt(0).getBoundingClientRect().bottom) + 'px';
-		formatOptions.style.left = selection.getRangeAt(0).getBoundingClientRect().left + 'px';
-	} else {
-		formatOptions.style.display = 'none';
-	}
-}
-
-function increaseFontSize() {
-	document.execCommand('fontSize', false, '4');
-}
-
-function decreaseFontSize() {
-	document.execCommand('fontSize', false, '2');
-}
