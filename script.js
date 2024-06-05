@@ -27,16 +27,12 @@ function initialise(){
   document.getElementById("predefinedTheme").addEventListener("change", function(){
     updateColour(1);
   });
-
   // Initial update
   updateColour(1);
   updateColour(2);
   updateColour(3);
-
-
   document.getElementById('customLogo').addEventListener('change', function(event) {updateLogo(event)});
   document.getElementById('predefinedLogo').addEventListener('change', function(event) {updateLogo(event)});
-  
   document.getElementById("loadButton").addEventListener('click', function() {
     const fileInput = document.getElementById('fileInput');
     if (fileInput.files.length > 0) {
